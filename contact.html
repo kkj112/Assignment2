@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        header
+        {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 5px;
+        }
+        nav
+        {
+            line-height: 30px;
+            background-color: #eeeeee;
+            height: 300px;
+            width: 100px;
+            float: left;
+            padding: 5px;
+        }
+        section
+        {
+            width: 350px;
+            float: left;
+            padding: 10px;
+        }
+    </style>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="css/datepicker.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="scripts/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap-datepicker.js"></script>
+    <script src="scripts/angular.js" type="text/javascript"></script>
+    <script src="scripts/moment.js" type="text/javascript"></script>
+    <script data-main="app/main" src="scripts/require.js" type="text/javascript"></script>
+</head>
+<body style="background-color: Gray; padding: 25px;" bgcolor="yellow">
+    <div id="header">
+        <h1 style="color: Maroon;" align="center">
+            Kiran Realty Group
+        </h1>
+    </div>
+    <div id="nav">
+        <table class="table" width="99%">
+            <tr class="active">
+                <th align="center">
+                    <a href="main.html">Home</a>
+                </th>
+                <th align="center">
+                    <a href="property.html">View Properties</a>
+                </th>
+                <th align="center">
+                    <a href="about.html">About Us</a>
+                </th>
+                <th align="center">
+                    <a href="contact.html">Contact Us</a>
+                </th>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <br />
+    <div id="aside" style="float: left; margin-left: 25px; color: Black;">
+        <form method="post" name="contactform" action="">
+        <div id="contact_form_wrapper">
+            <h3 class="title-7 margin-font-bottom">
+                How can we help you?</h3>
+            <ol class="form-list">
+                <li class="form-list-item">
+                    <label class="text-9 form-list-label">
+                        First name:</label>
+                    <span class="field input text field-5">
+                        <input type="text" name="first_name" value="" id="firstname" maxlength="150" />
+                    </span></li>
+                <li class="form-list-item">
+                    <label class="text-9 form-list-label">
+                        Last name:</label>
+                    <span class="field input text field-5">
+                        <input type="text" name="last_name" value="" id="lastname" maxlength="150" />
+                    </span></li>
+                <li class="form-list-item">
+                    <label class="text-9 form-list-label">
+                        Email address:</label>
+                    <span class="field input text field-5">
+                        <input type="text" name="email" value="" id="email" maxlength="64" />
+                    </span></li>
+                <li class="form-list-item">
+                    <label class="text-9 form-list-label">
+                        Phone Number (Optional):</label>
+                    <span class="field input text field-5">
+                        <input type="text" name="phone_number" value="" id="phone_number" maxlength="20" />
+                    </span></li>
+                <li class="form-list-item">
+                    <label class="text-9 form-list-label">
+                        When we can contact you? (Optional):</label>
+                    <span class="field input text field-5">
+                        <div ng-controller="indexCtrl" style="clear: both;">
+                            <div class="col-xs-2" datepicker value="birthday">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                    </span></li>
+                <li class="form-list-item">
+                    <label class="text-9 form-list-label">
+                        I'm Interested In:</label>
+                    <span class="field select field-5">
+                        <select name="recipient_email" style="color: Black;">
+                            <option value="564000e9b4fcc">General Comment or Inquiry</option>
+                            <option value="564000e9b5034">Becoming a Agent</option>
+                        </select>
+                    </span></li>
+                <li class="form-list-item">
+                    <label class="text-9 form-list-label">
+                        How can we help?</label>
+                    <span class="field textarea field-5">
+                        <textarea name="user_message" cols="50" rows="6" id="field-message"></textarea>
+                    </span></li>
+            </ol>
+            <div class="margin-gutter-vertical" style="text-align: center;">
+                <button type="submit" class="btn btn-skin btn-1">
+                    Send Request</button>
+                <br />
+                <br />
+            </div>
+        </div>
+        </form>
+    </div>
+    <script type="text/javascript" language="javascript">
+
+        $(document).ready(function () {
+            $('button').click(function (e) {
+                var dataString = 'first_name=' + $('#first_name').val() + '&email=' + $('#email').val();
+                $.ajax({
+                    type: "POST",
+                    url: "save.php",
+                    data: dataString,
+                    success: function () {
+                        alert("✓ Logged!\n\nYour request has been received. You will be contacted soon by our representative.");
+                    },
+                    error: function () {
+                        alert("An error occured!!!");
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+</body>
+</html>
